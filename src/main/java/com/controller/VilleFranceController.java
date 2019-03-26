@@ -19,7 +19,7 @@ public class VilleFranceController {
 	@RequestMapping(value="/villeFrance", method=RequestMethod.GET)
 	@ResponseBody
 	
-	/* Lien : localhost:8181/path/villeFrance */
+	/* Lien : localhost:8181/path/villeFrance OUI C'EST LE LIEN*/
 	
 	public List <VilleFranceBLO> get(@RequestParam(required = false, value="value") List<VilleFranceBLO> villeFrance) {
 		
