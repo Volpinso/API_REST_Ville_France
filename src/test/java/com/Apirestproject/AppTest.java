@@ -1,4 +1,4 @@
-package com.ApiRestProject;
+package com.Apirestproject;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
