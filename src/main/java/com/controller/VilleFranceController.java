@@ -236,7 +236,7 @@ public class VilleFranceController {
 		
 		return putReturn;
 	}
-	
+	//Compter les villes
 	@RequestMapping(value="/villeFranceCompte", method=RequestMethod.GET)
 	@ResponseBody
 	
