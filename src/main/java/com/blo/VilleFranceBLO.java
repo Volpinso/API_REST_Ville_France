@@ -71,6 +71,7 @@ public class VilleFranceBLO {
 		this.longitude = longitude;
 	}
 	
+	@Override
 	 public String toString() {
 	        return "Ville_France [codeCommuneInsee=" + this.codeCommuneInsee + ", nomCommune=" + this.nomCommune 
 	        		+ ", codePostal=" + this.codePostal

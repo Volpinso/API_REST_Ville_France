@@ -14,14 +14,8 @@ public class App extends SpringBootServletInitializer
         return application.sources(App.class);
     }
 	
-    public static void main( String[] args )
+    public static void main( String[] args ) throws Exception
     {
-        try {
-        	SpringApplication.run(App.class, args);
-        	System.out.println("Application démarrée !");
-        }
-        catch (Exception e) {
-        	System.out.println("Application erreur \n" + e);
-        }
+        SpringApplication.run(App.class, args);
     }
 }
