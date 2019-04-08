@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import com.blo.VilleFranceBLO;
 
 public class VilleFranceDAO extends DAO<VilleFranceBLO>{
@@ -35,6 +38,8 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
     private static final String DELETE = "DELETE FROM";
     
     private static final String COUNT = "SELECT Count(code_Commune_INSEE) FROM ville_france WHERE code_Commune_INSEE = '";
+    
+    private static Logger logger = Logger.getLogger(VilleFranceDAO.class.getName());
 
   
     /**
@@ -48,7 +53,6 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 
 	@Override
 	public List<VilleFranceBLO> lister() {
-		// TODO Auto-generated method stub
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -77,7 +81,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
             connection.close();
             
         } catch (SQLException e) {
-        	System.out.println("Echec du Select." + e);
+        	logger.log(Level.WARN, "Échec de la requête.", e);
         }
             // fermeture des ressources utilisées
             
@@ -121,13 +125,12 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-        	System.out.println("Echec du Select." + e);
+        	logger.log(Level.WARN, "Échec de la requête.", e);
         }	
 	}
 
 	@Override
 	public List<VilleFranceBLO> trouver(VilleFranceBLO villeFranceBLO) {
-		// TODO Auto-generated method stub
 				Connection connection = null;
 				PreparedStatement preparedStatement = null;
 				ResultSet resultSet = null;
@@ -156,7 +159,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 		            connection.close();
 		            
 		        } catch (SQLException e) {
-		        	System.out.println("Echec du Select." + e);
+		        	logger.log(Level.WARN, "Échec de la requête.", e);
 		        }
 		            // fermeture des ressources utilisées
 		            
@@ -165,7 +168,6 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 
 	@Override
 	public void modifier(VilleFranceBLO villeFranceBLO) {
-		// TODO Auto-generated method stub
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
@@ -187,14 +189,12 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
             connection.close();
             
         } catch (SQLException e) {
-        	System.out.println("Echec du Select." + e);
+        	logger.log(Level.WARN, "Échec de la requête.", e);
         }	
 	}
 
 	@Override
 	public void supprimer(VilleFranceBLO villeFranceBLO) {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
 				Connection connection = null;
 				PreparedStatement preparedStatement = null;
 				
@@ -211,15 +211,13 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 		            connection.close();
 		            
 		        } catch (SQLException e) {
-		        	System.out.println("Echec du Select." + e);
+		        	logger.log(Level.WARN, "Échec de la requête.", e);
 		        }	
 	}
 	
 	
 	
 	public int compter(VilleFranceBLO villeFranceBLO) {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
 				Connection connection = null;
 				PreparedStatement preparedStatement = null;
 				ResultSet resultSet = null;
@@ -239,7 +237,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 		            connection.close();
 		            
 		        } catch (SQLException e) {
-		        	System.out.println("Echec du Select." + e);
+		        	logger.log(Level.WARN, "Échec de la requête.", e);
 		        }
 				return count;
 	}
