@@ -217,7 +217,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 	
 	
 	
-	public int compter(String codeCommune) {
+	public int compter(VilleFranceBLO villeFranceBLO) {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 				Connection connection = null;
@@ -228,7 +228,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 				try {
 		            // création d'une connexion grâce à la DAOFactory placée en attribut de la classe
 		            connection = this.creerConnexion();
-		            preparedStatement = connection.prepareStatement(COUNT + codeCommune + "'");
+		            preparedStatement = connection.prepareStatement(COUNT + villeFranceBLO.getCodeCommuneInsee() + "'");
 		            resultSet = preparedStatement.executeQuery();
 		            while (resultSet.next()) {
 		            	count = resultSet.getInt(1);

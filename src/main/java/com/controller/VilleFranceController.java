@@ -245,7 +245,9 @@ public class VilleFranceController {
 		DAOFactory factory = new DAOFactory(Application.getString("url"), 
 				Application.getString("nomUtilisateur"), Application.getString("motDePasse"));
 		VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
-		int compte = villeFranceDAO.compter(codeCommune);
+		VilleFranceBLO ville = new VilleFranceBLO();
+		ville.setCodeCommuneInsee(codeCommune);
+		int compte = villeFranceDAO.compter(ville);
 		System.out.println("Appel GET");
 		return compte;
 	}
