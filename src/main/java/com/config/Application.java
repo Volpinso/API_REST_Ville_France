@@ -9,11 +9,7 @@ public class Application {
 
   private Application() {}
 
-  public static String getString(String key) {
-    try {
+  public static String getString(String key) throws MissingResourceException {
       return RESOURCE_BUNDLE.getString(key);
-    } catch (MissingResourceException e) {
-      return '!' + key + '!';
-    }
   }
 }
