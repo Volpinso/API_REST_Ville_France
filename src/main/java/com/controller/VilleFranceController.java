@@ -17,9 +17,9 @@ import com.config.Application;
 @RestController
 public class VilleFranceController {
 	
-	private static final String motDePasse = Application.getString("motDePasse");
-	private static final String nomUtilisateur = Application.getString("nomUtilisateur");
-	private static final String url = Application.getString("url");
+	private static final String MOT_DE_PASSE = Application.getString("motDePasse");
+	private static final String NOM_UTILISATEUR = Application.getString("nomUtilisateur");
+	private static final String URL = Application.getString("url");
 	
 	/* Lien : localhost:8181/path/villeFrance OUI C'EST LE LIEN BIS*/
 	@RequestMapping(value="/villeFrance", method=RequestMethod.GET)
@@ -27,11 +27,10 @@ public class VilleFranceController {
 	
 	public List<VilleFranceBLO> get(@RequestParam(required = false, value="value") List<VilleFranceBLO> ville
 	){
-		DAOFactory factory = new DAOFactory(url, 
-				nomUtilisateur, motDePasse);
+		DAOFactory factory = new DAOFactory(URL, 
+				NOM_UTILISATEUR, MOT_DE_PASSE);
 		VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
-		ville = villeFranceDAO.lister();
-		return ville;
+		return villeFranceDAO.lister();
 	}
 
 	@RequestMapping(value="/villeFranceFind", method=RequestMethod.GET)
@@ -39,8 +38,8 @@ public class VilleFranceController {
 	
 	public List <VilleFranceBLO> getWhere(@RequestParam(required = false, value="value") String codePostal) {
 
-		DAOFactory factory = new DAOFactory(url, 
-				nomUtilisateur, motDePasse);
+		DAOFactory factory = new DAOFactory(URL, 
+				NOM_UTILISATEUR, MOT_DE_PASSE);
 		VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
 		VilleFranceBLO villeFranceFind = new VilleFranceBLO();
 		villeFranceFind.setCodePostal(codePostal);
@@ -53,8 +52,8 @@ public class VilleFranceController {
 	public String delete(@RequestParam(required = false, value="value") String codeCommuneInsee) {
 		
 		String deleteReturn;
-		DAOFactory factory = new DAOFactory(url, 
-				nomUtilisateur, motDePasse);
+		DAOFactory factory = new DAOFactory(URL, 
+				NOM_UTILISATEUR, MOT_DE_PASSE);
 		VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
 		VilleFranceBLO villeFranceFind = new VilleFranceBLO();
 		villeFranceFind.setCodeCommuneInsee(codeCommuneInsee);
@@ -69,15 +68,13 @@ public class VilleFranceController {
 	
 	public String post(@RequestParam(required = false, value="value") String ville) {
 		String postReturn;
-		DAOFactory factory = new DAOFactory(url, 
-				nomUtilisateur, motDePasse);
+		DAOFactory factory = new DAOFactory(URL, 
+				NOM_UTILISATEUR, MOT_DE_PASSE);
 		VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
 		VilleFranceBLO villeFrance = new VilleFranceBLO(); 
 		
-		int debutDepart = 0;
-		int finDepart = 0;
-		debutDepart = ville.indexOf("codeCommuneInsee=");
-		finDepart = ville.indexOf(", nomCommune=");
+		int debutDepart = ville.indexOf("codeCommuneInsee=");
+		int finDepart = ville.indexOf(", nomCommune=");
 		
 		if(debutDepart < 0) {
 			debutDepart = -2;
@@ -137,8 +134,8 @@ public class VilleFranceController {
 	VilleFranceBLO ville) {
 		
 		String putReturn;
-		DAOFactory factory = new DAOFactory(url, 
-				nomUtilisateur, motDePasse);
+		DAOFactory factory = new DAOFactory(URL, 
+				NOM_UTILISATEUR, MOT_DE_PASSE);
 		VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
 		villeFranceDAO.creer(ville);
 		putReturn = "Ville Créée de la base";
@@ -152,8 +149,8 @@ public class VilleFranceController {
 	public String deleteInsee(@RequestParam(required = false, value="value") String codeCommuneInsee) {
 		
 		String deleteReturn;
-		DAOFactory factory = new DAOFactory(url, 
-				nomUtilisateur, motDePasse);
+		DAOFactory factory = new DAOFactory(URL, 
+				NOM_UTILISATEUR, MOT_DE_PASSE);
 		VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
 		VilleFranceBLO villeFranceFind = new VilleFranceBLO();
 		villeFranceFind.setCodeCommuneInsee(codeCommuneInsee);
@@ -169,15 +166,13 @@ public class VilleFranceController {
 	public String addVille(@RequestParam(required = false, value="value") String ville) {
 		
 		String putReturn;
-		DAOFactory factory = new DAOFactory(url, 
-				nomUtilisateur, motDePasse);
+		DAOFactory factory = new DAOFactory(URL, 
+				NOM_UTILISATEUR, MOT_DE_PASSE);
 		VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
 		VilleFranceBLO villeFrance = new VilleFranceBLO(); 
 		
-		int debutDepart = 0;
-		int finDepart = 0;
-		debutDepart = ville.indexOf("codeCommuneInsee=");
-		finDepart = ville.indexOf(", nomCommune=");
+		int debutDepart = ville.indexOf("codeCommuneInsee=");
+		int finDepart = ville.indexOf(", nomCommune=");
 		
 		if(debutDepart < 0) {
 			debutDepart = -2;
@@ -233,12 +228,11 @@ public class VilleFranceController {
 	
 	public int getCount(@RequestParam(required = false, value="value") String codeCommune
 	){
-		DAOFactory factory = new DAOFactory(url, 
-				nomUtilisateur, motDePasse);
+		DAOFactory factory = new DAOFactory(URL, 
+				NOM_UTILISATEUR, MOT_DE_PASSE);
 		VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
 		VilleFranceBLO ville = new VilleFranceBLO();
 		ville.setCodeCommuneInsee(codeCommune);
-		int compte = villeFranceDAO.compter(ville);
-		return compte;
+		return villeFranceDAO.compter(ville);
 	}
 }
