@@ -25,8 +25,8 @@ public class VilleFranceController {
 	@RequestMapping(value="/villeFrance", method=RequestMethod.GET)
 	@ResponseBody
 	
-	public List<VilleFranceBLO> get(@RequestParam(required = false, value="value") List<VilleFranceBLO> ville
-	){
+	public List<VilleFranceBLO> get(){
+
 		DAOFactory factory = new DAOFactory(URL, 
 				NOM_UTILISATEUR, MOT_DE_PASSE);
 		VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
