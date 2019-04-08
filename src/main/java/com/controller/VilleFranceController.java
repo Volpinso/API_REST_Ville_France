@@ -99,16 +99,16 @@ public class VilleFranceController {
 	
 	public String deleteInsee(@RequestParam(required = false, value="value") String codeCommuneInsee) {
 		
-		String deleteReturn;
+		String deleteInseeReturn;
 		DAOFactory factory = new DAOFactory(URL, 
 				NOM_UTILISATEUR, MOT_DE_PASSE);
 		VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
-		VilleFranceBLO villeFranceFind = new VilleFranceBLO();
-		villeFranceFind.setCodeCommuneInsee(codeCommuneInsee);
-		villeFranceDAO.supprimer(villeFranceFind);
-		deleteReturn = "Ville Supprimée de la base";
+		VilleFranceBLO villeFranceTrouve = new VilleFranceBLO();
+		villeFranceTrouve.setCodeCommuneInsee(codeCommuneInsee);
+		villeFranceDAO.supprimer(villeFranceTrouve);
+		deleteInseeReturn = "Ville Supprimée de la base";
 			
-		return deleteReturn;
+		return deleteInseeReturn;
 	}
 	
 	@RequestMapping(value="/villeFranceAdd", method=RequestMethod.POST)
