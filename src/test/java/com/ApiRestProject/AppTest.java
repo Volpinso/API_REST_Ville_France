@@ -1,4 +1,4 @@
-package com.API_REST_Project;
+package com.ApiRestProject;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

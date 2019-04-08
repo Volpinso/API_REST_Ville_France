@@ -39,8 +39,8 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
     
     private static final String COUNT = "SELECT Count(code_Commune_INSEE) FROM ville_france WHERE code_Commune_INSEE = '";
     
-    private static Logger logger = Logger.getLogger(VilleFranceDAO.class.getName());
-    private static String erreur = "Echec de la requête";
+    private static Logger LOGGER = Logger.getLogger(VilleFranceDAO.class.getName());
+    private static String ERREUR = "Echec de la requête";
 
   
     /**
@@ -74,7 +74,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
             connection.close();
             
         } catch (SQLException e) {
-        	logger.log(Level.WARN, erreur, e);
+        	LOGGER.log(Level.WARN, ERREUR, e);
         }
             // fermeture des ressources utilisées
             
@@ -118,7 +118,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-        	logger.log(Level.WARN, erreur, e);
+        	LOGGER.log(Level.WARN, ERREUR, e);
         }	
 	}
 
@@ -144,7 +144,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 		            connection.close();
 		            
 		        } catch (SQLException e) {
-		        	logger.log(Level.WARN, erreur, e);
+		        	LOGGER.log(Level.WARN, ERREUR, e);
 		        }
 		            // fermeture des ressources utilisées
 		            
@@ -174,7 +174,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
             connection.close();
             
         } catch (SQLException e) {
-        	logger.log(Level.WARN, erreur, e);
+        	LOGGER.log(Level.WARN, ERREUR, e);
         }	
 	}
 
@@ -196,7 +196,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 		            connection.close();
 		            
 		        } catch (SQLException e) {
-		        	logger.log(Level.WARN, erreur, e);
+		        	LOGGER.log(Level.WARN, ERREUR, e);
 		        }	
 	}
 	
@@ -222,7 +222,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 		            connection.close();
 		            
 		        } catch (SQLException e) {
-		        	logger.log(Level.WARN, erreur, e);
+		        	LOGGER.log(Level.WARN, ERREUR, e);
 		        }
 				return count;
 	}

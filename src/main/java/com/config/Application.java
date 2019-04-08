@@ -1,5 +1,4 @@
 package com.config;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class Application {
@@ -9,7 +8,7 @@ public class Application {
 
   private Application() {}
 
-  public static String getString(String key) throws MissingResourceException {
+  public static String getString(String key) {
       return RESOURCE_BUNDLE.getString(key);
   }
 }
