@@ -7,9 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-
 import com.blo.VilleFranceBLO;
 
 public class VilleFranceDAO extends DAO<VilleFranceBLO>{
@@ -35,11 +32,11 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
     		+ "Ligne_5, Latitude, Longitude FROM ville_france";
     
     /* Constantes pour éviter la duplication de code */
-    private static final String DELETE = "DELETE";
-
-    /* Logger */
-    private static Logger logger = Logger.getLogger(VilleFranceDAO.class.getName());
+    private static final String DELETE = "DELETE FROM";
     
+    private static final String COUNT = "SELECT Count(code_Commune_INSEE) FROM ville_france WHERE code_Commune_INSEE = '";
+
+  
     /**
      * Constructeur de DAO.
      *
@@ -80,7 +77,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
             connection.close();
             
         } catch (SQLException e) {
-        	logger.log(Level.WARN, "Echec du Select.", e);
+        	System.out.println("Echec du Select." + e);
         }
             // fermeture des ressources utilisées
             
@@ -111,7 +108,6 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
             // création d'une connexion grâce à la DAOFactory placée en attribut de la classe
             connection = this.creerConnexion();
             preparedStatement = connection.prepareStatement(SQL_INSERT + "'" + villeFranceBLO.getCodeCommuneInsee() + "', "
-            		+ "'" + villeFranceBLO.getCodeCommuneInsee() + "', "
             		+ "'" + villeFranceBLO.getNomCommune() + "', "
             		+ "'" + villeFranceBLO.getCodePostal() + "', "
             		+ "'" + villeFranceBLO.getLibelleAcheminement() + "', "
@@ -124,9 +120,8 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
             
             preparedStatement.close();
             connection.close();
-            
         } catch (SQLException e) {
-        	logger.log(Level.WARN, "Echec de l'insert.", e);
+        	System.out.println("Echec du Select." + e);
         }	
 	}
 
@@ -137,12 +132,11 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 				PreparedStatement preparedStatement = null;
 				ResultSet resultSet = null;
 				List<VilleFranceBLO> villeFranceListe = new ArrayList<VilleFranceBLO>();
-				
 				try {
 		            // création d'une connexion grâce à la DAOFactory placée en attribut de la classe
 		            connection = this.creerConnexion();
 		            preparedStatement = connection.prepareStatement(SQL_SELECT_WHERE + 
-		            		"Code_Postal LIKE '%" + villeFranceBLO.getCodePostal() + "%'");
+		            		" WHERE Code_Postal LIKE '%" + villeFranceBLO.getCodePostal() + "%'");
 		            resultSet = preparedStatement.executeQuery();
 		            // récupération des valeurs des attributs de la BDD pour les mettre dans une liste
 		            while (resultSet.next()) {
@@ -162,7 +156,7 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 		            connection.close();
 		            
 		        } catch (SQLException e) {
-		        	logger.log(Level.WARN, "Echec du Select.", e);
+		        	System.out.println("Echec du Select." + e);
 		        }
 		            // fermeture des ressources utilisées
 		            
@@ -178,17 +172,22 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 		try {
             // création d'une connexion grâce à la DAOFactory placée en attribut de la classe
             connection = this.creerConnexion();
-            preparedStatement = connection.prepareStatement("UPDATE ville_france SET Code_poste = '58000' WHERE"
-            		+ "Code_Postal LIKE '" + villeFranceBLO.getCodePostal() + "'");
+            String requete = "UPDATE ville_france SET Nom_Commune = '" + villeFranceBLO.getNomCommune() + 
+            		"', Code_postal = '" + villeFranceBLO.getCodePostal() +
+            		"', Libelle_acheminement = '" + villeFranceBLO.getLibelleAcheminement() +
+            		"', Ligne_5 = '" + villeFranceBLO.getLigne5() +
+            		"', Latitude = '" + villeFranceBLO.getLattitude() +
+            		"', Longitude = '" + villeFranceBLO.getLongitude() + 
+            		"' WHERE Code_Commune_INSEE LIKE '%" + villeFranceBLO.getCodeCommuneInsee() + "%'";
             
+            preparedStatement = connection.prepareStatement(requete);
             preparedStatement.executeUpdate();
-            
             
             preparedStatement.close();
             connection.close();
             
         } catch (SQLException e) {
-        	logger.log(Level.WARN, "Echec de l'insert.", e);
+        	System.out.println("Echec du Select." + e);
         }	
 	}
 
@@ -202,8 +201,8 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 				try {
 		            // création d'une connexion grâce à la DAOFactory placée en attribut de la classe
 		            connection = this.creerConnexion();
-		            preparedStatement = connection.prepareStatement("DELETE FROM ville_france WHERE"
-		            		+ "Code_Postal LIKE '%" + villeFranceBLO.getCodePostal() + "%'");
+		            preparedStatement = connection.prepareStatement(DELETE + " ville_france WHERE "
+		            		+ "Code_Commune_INSEE LIKE '%" + villeFranceBLO.getCodeCommuneInsee() + "%'");
 		            
 		            preparedStatement.executeUpdate();
 		            
@@ -212,7 +211,38 @@ public class VilleFranceDAO extends DAO<VilleFranceBLO>{
 		            connection.close();
 		            
 		        } catch (SQLException e) {
-		        	logger.log(Level.WARN, "Echec de l'insert.", e);
+		        	System.out.println("Echec du Select." + e);
 		        }	
 	}
+	
+	
+	
+	public int compter(String codeCommune) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+				Connection connection = null;
+				PreparedStatement preparedStatement = null;
+				ResultSet resultSet = null;
+				int count = 0;
+				
+				try {
+		            // création d'une connexion grâce à la DAOFactory placée en attribut de la classe
+		            connection = this.creerConnexion();
+		            preparedStatement = connection.prepareStatement(COUNT + codeCommune + "'");
+		            resultSet = preparedStatement.executeQuery();
+		            while (resultSet.next()) {
+		            	count = resultSet.getInt(1);
+		            }
+		            
+		            
+		            preparedStatement.close();
+		            connection.close();
+		            
+		        } catch (SQLException e) {
+		        	System.out.println("Echec du Select." + e);
+		        }
+				return count;
+	}
+	
+	
 }
