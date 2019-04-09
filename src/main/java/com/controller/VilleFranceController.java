@@ -75,11 +75,20 @@ public class VilleFranceController {
     @RequestMapping(value = "/villeFrancePut", method = RequestMethod.PUT)
     @ResponseBody
 
-    public String put(@RequestParam(required = false, value = "value") VilleFranceBLO ville) {
-
+    public String put(@RequestParam(required = false, value = "value") String codeCommuneInsee,
+            String nomCommune, String codePostal, String libelle, String ligne, String lat,
+            String lon) {
         String putReturn;
         DAOFactory factory = new DAOFactory(URL, NOM_UTILISATEUR, MOT_DE_PASSE);
         VilleFranceDAO villeFranceDAO = new VilleFranceDAO(factory);
+        VilleFranceBLO ville =new VilleFranceBLO();
+        ville.setCodeCommuneInsee(codeCommuneInsee);
+        ville.setCodePostal(codePostal);
+        ville.setLattitude(lat);
+        ville.setLibelleAcheminement(libelle);
+        ville.setLigne5(ligne);
+        ville.setLongitude(lon);
+        ville.setNomCommune(nomCommune);
         villeFranceDAO.creer(ville);
         putReturn = "Ville Créée de la base";
 
